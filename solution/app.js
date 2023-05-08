@@ -10,6 +10,53 @@ const p = document.createElement('p');
 let previousGuesses = [];
 let numGuesses = 1;
 let playGame = true;
+let remainingSeconds = 5;
+
+// let startBtn = document.getElementById("start-btn");
+// function handleStartButtonClick() {
+//   // Actualizar el contenido del elemento de tiempo restante con el valor inicial
+//   remainingSecondsEl.innerHTML = remainingSeconds.toString();
+
+//   // Iniciar la cuenta regresiva y guardar el ID del intervalo en una variable
+//   let intervalId = setInterval(updateRemainingTime, 1000);
+// }
+
+// // Agregar el evento de escucha de clic al botón de start
+// startBtn.addEventListener("click", handleStartButtonClick);
+
+document.querySelector("#remaining-time").innerHTML = remainingSeconds;
+
+// Cada segundo (1000ms) quiero que ejecutes la función updateRemainingTime
+let timer = setInterval(updateRemainingTime, 1000);
+
+function updateRemainingTime() {
+  console.log("Me ejecuto cada segundo");
+  // 1. Decrementar la variable de estado remainingSeconds
+  remainingSeconds -= 1;
+  console.log(remainingSeconds);
+  // 2. Actualizar el innerHTML de #remaining-time
+  let remainingSecondsUpdates = document.querySelector("#remaining-time");
+  remainingSecondsUpdates.innerHTML = remainingSeconds.toString();
+  // 3. Cuando llegue a 0 ha perdido
+if (remainingSeconds === 0) {
+clearInterval(timer);
+userInput.value = '';
+userInput.setAttribute('disabled', '');
+submit.disabled = true;
+p.innerHTML = `<h1>Game Over! Number was ${randomNumber}</h1>`
+startOver.appendChild(p);
+
+//Display Start new Game Button
+// p.classList.add('button');
+// p.innerHTML = `<h1 id="newGame">Start New Game</h1>`
+// startOver.appendChild(p);
+// playGame = false;
+// newGame();
+}
+  //   3.1 Bloquear el input para que no pueda escribir más
+  // 3.2 Mostrar un mensaje que el tiempo ha finalizado e informar al usuario del numero secreto, cual era
+  // 3.3 Bonus: IMPEDIR que el usuario pueda hacer click en el botón
+}
 
 if (playGame){
     subt.addEventListener('click', function(e){
